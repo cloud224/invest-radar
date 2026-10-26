@@ -1,0 +1,76 @@
+{
+  "_說明": "修改這個檔案就能調整要追蹤的股票、指數與新聞關鍵字。代號使用 Yahoo Finance 格式（台股上市加 .TW，上櫃加 .TWO）。",
+  "repo_url": "https://github.com/cloud224/invest-radar",
+  "taiex": { "sym": "^TWII", "name": "台股加權指數" },
+  "indices": [
+    { "sym": "^GSPC", "name": "S&P 500" },
+    { "sym": "^IXIC", "name": "那斯達克" },
+    { "sym": "^N225", "name": "日經 225" },
+    { "sym": "^KS11", "name": "KOSPI" },
+    { "sym": "^HSI", "name": "香港恆生" },
+    { "sym": "000001.SS", "name": "上證" },
+    { "sym": "^GDAXI", "name": "德國 DAX" },
+    { "sym": "^FTSE", "name": "英國富時" },
+    { "sym": "^NSEI", "name": "Nifty 50" }
+  ],
+  "macro": [
+    { "sym": "BZ=F", "name": "布蘭特原油", "unit": "美元" },
+    { "sym": "CL=F", "name": "WTI 原油", "unit": "美元" },
+    { "sym": "GC=F", "name": "黃金", "unit": "美元" },
+    { "sym": "TWD=X", "name": "美元/台幣", "unit": "" },
+    { "sym": "DX-Y.NYB", "name": "美元指數", "unit": "" },
+    { "sym": "^TNX", "name": "美10年債殖利率", "unit": "%" },
+    { "sym": "^VIX", "name": "VIX 恐慌指數", "unit": "" },
+    { "sym": "BTC-USD", "name": "比特幣", "unit": "美元" }
+  ],
+  "ai_index": { "sym": "^SOX", "name": "費城半導體" },
+  "ai_stocks": [
+    { "sym": "NVDA", "name": "NVIDIA" },
+    { "sym": "2330.TW", "name": "台積電" },
+    { "sym": "MSFT", "name": "微軟" },
+    { "sym": "GOOGL", "name": "Google" },
+    { "sym": "META", "name": "Meta" },
+    { "sym": "AMZN", "name": "亞馬遜" },
+    { "sym": "AAPL", "name": "蘋果" },
+    { "sym": "AVGO", "name": "博通" },
+    { "sym": "AMD", "name": "AMD" }
+  ],
+  "watchlist": [
+    { "sym": "0050.TW", "name": "元大台灣50" },
+    { "sym": "0056.TW", "name": "元大高股息" },
+    { "sym": "00878.TW", "name": "國泰永續高股息" },
+    { "sym": "2317.TW", "name": "鴻海" },
+    { "sym": "2454.TW", "name": "聯發科" },
+    { "sym": "VOO", "name": "Vanguard S&P 500 ETF" },
+    { "sym": "QQQ", "name": "Invesco QQQ" }
+  ],
+  "news": {
+    "world_queries": [
+      "國際 局勢",
+      "空襲 OR 飛彈 OR 攻擊",
+      "停火 OR 談判",
+      "抗議 OR 示威",
+      "疫情 爆發",
+      "軍演 OR 軍事 威脅",
+      "地震 OR 颱風 OR 洪水"
+    ],
+    "ai_market_queries": ["AI 股 美股", "AI 概念股"],
+    "ai_model_queries": ["AI 新模型 發布", "生成式AI 模型"],
+    "ai_money_queries": ["AI 融資 OR IPO", "AI 資本支出"],
+    "tw_queries": ["台股 收盤", "外資 台股"],
+    "macro_queries": ["Fed 利率", "油價", "黃金 價格"],
+    "max_age_hours": 48
+  },
+  "central_banks": [
+    {
+      "name": "Fed 利率決議",
+      "short": "央行",
+      "tz": "America/New_York",
+      "time": "14:00",
+      "dates": [
+        "2026-01-28", "2026-03-18", "2026-04-29", "2026-06-17", "2026-07-29", "2026-09-16", "2026-10-28", "2026-12-09",
+        "2027-01-27", "2027-03-17", "2027-04-28", "2027-06-09", "2027-07-28", "2027-09-15", "2027-10-27", "2027-12-08"
+      ]
+    }
+  ]
+}
