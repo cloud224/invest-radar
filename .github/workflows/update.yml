@@ -1,0 +1,66 @@
+name: 更新投資資料
+
+on:
+  schedule:
+    # UTC 時間每 3 小時一次（台灣時間 08、11、14、17、20、23、02、05 點左右；GitHub 排程常會延遲幾分鐘到幾十分鐘）
+    - cron: "17 */3 * * *"
+  workflow_dispatch: {}   # 在 Actions 頁面按「Run workflow」可手動立即更新
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 安裝套件
+        run: pip install -r requirements.txt
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: 下載上一次的資料（判斷局勢是新出現還是升溫）
+        run: curl -fsSL "${{ steps.pages.outputs.base_url }}/data/data.json" -o prev.json || echo "第一次執行，沒有舊資料"
+
+      - name: 抓取資料
+        run: |
+          if [ -f prev.json ]; then
+            python fetch_data.py --prev prev.json || cp prev.json data/data.json
+          else
+            python fetch_data.py || echo "抓取失敗，先沿用示範資料"
+          fi
+
+      - name: 準備網站檔案
+        run: |
+          mkdir -p _site/data
+          cp index.html _site/
+          cp data/data.json _site/data/
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
